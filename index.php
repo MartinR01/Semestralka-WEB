@@ -12,7 +12,7 @@
   $username="root";
   $password="";
 
-  $dns = "mysql:host=$host;dbname=$dbname";
+  $dns = "mysql:host=$host;dbname=$dbname;charset=utf8"; //charset pro české znaky!
 
 
 
@@ -20,11 +20,11 @@
   	$db = new PDO($dns,$username,$password);
   	$db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-    $dotaz = $db->prepare('SELECT * FROM test');
+    $dotaz = $db->prepare('SELECT * FROM film WHERE idFilm=:id');
+    $dotaz->bindParam(':id',$id);
+    $id=$_GET['id'];
     $dotaz->execute();
     $result = $dotaz->fetch(PDO::FETCH_ASSOC); // jinak to duplikuje data
-
-    print_r($result);
 
   } catch(PDOException $e){
   	echo "Error: " . $e->getMessage();
@@ -35,11 +35,11 @@
     switch ($_GET['page']) {
       case 'movie':
         $sablona='movie.twig';
-        $data['title'] = 'Revenant';
-        $data['poster'] = 'poster.jpeg';
-        $data['info'] = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-        $data['actors'] = 'Jakie Chan';
-        $data['comments'] = $result['text'];
+        $data['title'] = $result['nazev'];
+        $data['poster'] = 'images/movie_posters/'.$result['plakat_url'];
+        $data['info'] = $result['popis'];
+        $data['actors'] = 'Placeholder actor';
+        $data['comments'] = 'Placeholder comment';
         break;
 
       default:
