@@ -4,25 +4,25 @@
 
 {% block content %}
 <div class="row">
-  <div class="col-4 col-lg-3" style="background-color:red;">
-    <img class="img-fluid" src="poster.jpeg" alt="Poster"/>
+  <div class="col-4 col-lg-3">
+    <img class="img-fluid" src="{{ poster }}" alt="No poster found"/>
   </div>
-  <div class="col-8 col-lg-6" style="background-color:blue;">
+  <div class="col-8 col-lg-6">
     {{ title }}
   </div>
-  <div class="col-12 col-lg-3" style="background-color:green;">
-    Hodnoceni
+  <div class="col-12 col-lg-3">
+    {{ rating | default('no rating available')}}
   </div>
 </div>
 <div class="row">
   <div class="col-12">
-    Popis
+    {{ info | default('no info available')}}
   </div>
   <div class="col-12">
-    Herci
+    {{ actors | default('no actors available')}}
   </div>
   <div class="col-12">
-    Komentare
+    {{ comments | default('no comments available')}}
   </div>
 </div>
 {% endblock %}
