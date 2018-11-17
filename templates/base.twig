@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %} - Movie Database</title>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="vendor\twbs\bootstrap\dist\css\bootstrap.min.css">
+        <link rel="stylesheet" href="css\base.css">
+        {% block css %}{% endblock %}
+    </head>
+    <body>
+      {% include('navbar.twig') %}
+
+      <div class="container bg-white shadow">
+        {% block content %}{% endblock %}
+      </div>
+
+      <script src="vendor\components\jquery\jquery.min.js"></script>
+      <script src="vendor\twbs\bootstrap\dist\js\bootstrap.bundle.min.js"></script>
+    </body>
+</html>
