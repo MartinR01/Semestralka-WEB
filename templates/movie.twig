@@ -14,15 +14,18 @@
     {{ rating | default('no rating available')}}
   </div>
 </div>
-<div class="row">
-  <div class="col-12">
-    {{ info | default('no info available')}}
-  </div>
-  <div class="col-12">
-    {{ actors | default('no actors available')}}
-  </div>
-  <div class="col-12">
-    {{ comments | default('no comments available')}}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      {{ info | default('no info available')}}
+    </div>
+    <div class="col-12">
+      {{ actors | default('no actors available')}}
+    </div>
+    <div class="col-12">
+      {{ comments | default('no comments available')}}
+    </div>
   </div>
 </div>
+
 {% endblock %}

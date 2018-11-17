@@ -5,14 +5,15 @@
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="vendor\twbs\bootstrap\dist\css\bootstrap.min.css">
         <link rel="stylesheet" href="css\base.css">
+        <link rel="stylesheet" href="css\footer.css">
         {% block css %}{% endblock %}
     </head>
     <body>
       {% include('navbar.twig') %}
 
-      <div class="container bg-white shadow">
+      <main role="main" class="container bg-white shadow content">
         {% block content %}{% endblock %}
-      </div>
+      </main>
 
       {% include('footer.twig') %}
 
