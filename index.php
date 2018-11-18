@@ -4,6 +4,7 @@
   $loader = new Twig_Loader_Filesystem('templates');
   $twig = new Twig_Environment($loader); // no cache
 
+  $userID=1;
   $data = array();
 
   //DB variables
@@ -38,6 +39,7 @@
         $data['title'] = $result['nazev'];
         $data['poster'] = 'images/movie_posters/'.$result['plakat_url'];
         $data['info'] = $result['popis'];
+        $data['movieID'] = $id;
         $data['actors'] = 'Placeholder actor';
         $data['comments'] = 'Placeholder comment';
         break;
