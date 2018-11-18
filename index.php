@@ -15,6 +15,8 @@
 
   $dns = "mysql:host=$host;dbname=$dbname;charset=utf8"; //charset pro české znaky!
 
+  $db = new PDO($dns,$username,$password);
+  $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
 
 
@@ -24,10 +26,7 @@
     switch ($_GET['page']) {
       case 'movie':
         try {
-          $db = new PDO($dns,$username,$password);
-          $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
-          $dotaz = $db->prepare('SELECT * FROM film WHERE idFilm=:id');
+          $dotaz = $db->prepare('SELECT film.nazev AS titul, zanr.nazev AS zanr, plakat_url, popis FROM film JOIN zanr ON zanr.idZanr=film.Zanr_idZanr WHERE idFilm=:id');
           $dotaz->bindParam(':id',$id);
           $id=$_GET['id'];
           $dotaz->execute();
@@ -37,19 +36,17 @@
           echo "Error: " . $e->getMessage();
         }
         $sablona='movie.twig';
-        $data['title'] = $result['nazev'];
+        $data['title'] = $result['titul'];
         $data['poster'] = 'images/movie_posters/'.$result['plakat_url'];
         $data['info'] = $result['popis'];
         $data['movieID'] = $id;
+        $data['genre'] = $result['zanr'];
         $data['actors'] = 'Placeholder actor';
         $data['comments'] = 'Placeholder comment';
         break;
 
       case 'actor':
         try {
-          $db = new PDO($dns,$username,$password);
-          $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
           $dotaz = $db->prepare('SELECT * FROM herec WHERE idHerec=:id');
           $dotaz->bindParam(':id',$id);
           $id=$_GET['id'];
