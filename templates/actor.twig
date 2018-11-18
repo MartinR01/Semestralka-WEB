@@ -1,0 +1,15 @@
+{% extends 'base.twig' %}
+
+{% block title %}{{ name }}{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-4 col-lg-3">
+      <img class="img-fluid" src="{{ photo }}" alt="No photo found"/>
+    </div>
+    <div class="col-8 col-lg-9">
+      <h1>{{ name }}</h1>
+      {{ bio }}
+    </div>
+  </div>
+{% endblock %}
