@@ -10,15 +10,17 @@ $.post("isFav.php",
   },
   function(data, status){
     if(data > 0){
-      $("#favBtn").addClass("faved");
+      $("#favBtn").toggleClass("fas");
+      $("#favBtn").toggleClass("far");
     }
   }
 );
 
 
 function toggleFav() {
-  var action = ($("#favBtn").hasClass("faved")) ? "removeFav.php" : "addFav.php";
-  $("#favBtn").toggleClass("faved");
+  var action = ($("#favBtn").hasClass("fas")) ? "removeFav.php" : "addFav.php";
+  $("#favBtn").toggleClass("fas");
+  $("#favBtn").toggleClass("far");
 
   $.post(action,
     {

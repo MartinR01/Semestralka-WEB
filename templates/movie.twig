@@ -9,8 +9,11 @@
     <img class="img-fluid" src="{{ poster }}" alt="No poster found"/>
   </div>
   <div class="col-8 col-lg-6">
-    <h1>{{ title }} <h5>({{ genre }})</h5></h1>
-    <button class="btn" id="favBtn" onclick="toggleFav()">Favorite</button>
+    <h1>{{ title }}
+      <span onclick="toggleFav()"><i class="far fa-heart" id="favBtn"></i></span>
+    </h1>
+
+    <h5>({{ genre }})</h5>
   </div>
   <div class="col-12 col-lg-3">
     {{ rating | default('no rating available')}}
