@@ -1,4 +1,6 @@
 <?php
+require_once('queries.class.php');
+
 if(isset($_POST['userID']) && isset($_POST['movieID']) && isset($_POST['action'])){
   //DB variables
   $host="localhost";
@@ -12,13 +14,13 @@ if(isset($_POST['userID']) && isset($_POST['movieID']) && isset($_POST['action']
   $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
 
-  $dotaz = $db->prepare('SELECT COUNT(*) FROM oblibene_filmy WHERE Film_idFilm=:movieID AND Uzivatel_idUzivatel=:userID');
+  $dotaz = $db->prepare(Queries::$movieIsFaved);
   $dotaz->bindParam(':userID',$_POST['userID']);
   $dotaz->bindParam(':movieID',$_POST['movieID']);
   $dotaz->execute();
   $isFav=($dotaz->fetch(PDO::FETCH_ASSOC)['COUNT(*)']);
 
-  
+
   // co je to za dotaz??
   switch($_POST['action']){
     case 'isFav':
@@ -26,9 +28,9 @@ if(isset($_POST['userID']) && isset($_POST['movieID']) && isset($_POST['action']
       break;
     case 'toggle':
       if($isFav == TRUE){
-        $dotaz = $db->prepare('DELETE FROM oblibene_filmy WHERE Film_idFilm=:movieID AND Uzivatel_idUzivatel=:userID');
+        $dotaz = $db->prepare(Queries::$movieDeleteFav);
       } else {
-        $dotaz = $db->prepare('INSERT INTO oblibene_filmy (Film_idFilm, Uzivatel_idUzivatel) VALUES (:movieID,:userID)');
+        $dotaz = $db->prepare(Queries::$movieAddFav);
       }
       $dotaz->bindParam(':userID',$_POST['userID']);
       $dotaz->bindParam(':movieID',$_POST['movieID']);
