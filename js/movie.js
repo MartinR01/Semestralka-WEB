@@ -3,13 +3,14 @@ let params = new URLSearchParams(window.location.search);
 let movieID = params.get('id');
 let userID = 1;
 
-$.post("isFav.php",
+$.post("favorite.php",
   {
+    action: "isFav",
     userID: userID,
     movieID: movieID
   },
   function(data, status){
-    if(data > 0){
+    if(data == 1){
       $("#favBtn").toggleClass("fas");
       $("#favBtn").toggleClass("far");
     }
@@ -18,12 +19,12 @@ $.post("isFav.php",
 
 
 function toggleFav() {
-  var action = ($("#favBtn").hasClass("fas")) ? "removeFav.php" : "addFav.php";
   $("#favBtn").toggleClass("fas");
   $("#favBtn").toggleClass("far");
 
-  $.post(action,
+  $.post("favorite.php",
     {
+        action: "toggle",
         userID: userID,
         movieID: movieID
     },
