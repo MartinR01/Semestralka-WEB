@@ -24,7 +24,7 @@
       $result = $db->query('movieIsFaved', array('userID' => 1, 'movieID' => $id ))->fetchColumn();
       $this->isFavorite = $result;
 
-      $this->actors = $db->query('movieActors', array('movieID' => $id))->fetchAll(PDO::FETCH_ASSOC);
+      $this->actors = $db->query('movieActors', array('id' => $id))->fetchAll(PDO::FETCH_ASSOC);
     }
 
   }

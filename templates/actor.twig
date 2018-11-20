@@ -10,6 +10,14 @@
     <div class="col-8 col-lg-9">
       <h1>{{ name }}</h1>
       {{ bio }}
+      <br />
+      {% if movies is not empty %}
+        {% for movie in movies %}
+          <a href="?page=movie&id={{ movie.id }}">{{ movie.nazev }}</a> ({{movie.role}}),
+        {% endfor %}
+      {% else %}
+        No movies available
+      {% endif %}
     </div>
   </div>
 {% endblock %}

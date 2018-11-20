@@ -23,6 +23,9 @@
         $result = new Actor($_GET['id']);
         $sablona='actor.twig';
         $data = (array)$result;
+        echo '<pre>';
+          var_dump($result->movies);
+         echo '</pre>';
         break;
 
       default:
