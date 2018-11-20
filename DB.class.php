@@ -6,8 +6,16 @@
 
     private static $queries = array(
       'getMovie' => 'SELECT film.nazev AS titul, zanr.nazev AS zanr, popis, plakat_url FROM film JOIN zanr ON zanr.idZanr=film.Zanr_idZanr WHERE idFilm=:id',
-      'getActor' => 'SELECT * FROM herec WHERE idHerec=:id'
+      'getActor' => 'SELECT * FROM herec WHERE idHerec=:id',
 
+      'movieIsFaved' => 'SELECT COUNT(*) FROM oblibene_filmy WHERE Film_idFilm=:movieID AND Uzivatel_idUzivatel=:userID',
+      'movieDeleteFav' => 'DELETE FROM oblibene_filmy WHERE Film_idFilm=:movieID AND Uzivatel_idUzivatel=:userID',
+      'movieAddFav' => 'INSERT INTO oblibene_filmy (Film_idFilm, Uzivatel_idUzivatel) VALUES (:movieID,:userID)',
+      'movieActors' => 'SELECT * FROM herec JOIN hraje ON hraje.Herec_idHerec=herec.idHerec WHERE hraje.Film_idFilm=:movieID',
+
+      'userFavs' => 'SELECT * FROM oblibene_filmy JOIN film ON film.idFilm=oblibene_filmy.Film_idFilm JOIN zanr ON zanr.idZanr=film.Zanr_idZanr WHERE oblibene_filmy.Uzivatel_idUzivatel=:userID',
+
+      'actorMovieRoles' => 'SELECT * FROM film JOIN hraje ON hraje.Film_idFilm=film.idFilm JOIN zanr ON zanr.idZanr=film.Zanr_idZanr WHERE hraje.Herec_idHerec=:actorID'
      );
 
 
@@ -30,10 +38,15 @@
       return DB::$INSTANCE;
     }
 
-    public function query($query, $arguments){
+    public function query($query, $arguments, $oneValue = false){
       $dotaz = $this->db->prepare(self::$queries[$query]);
       $dotaz->execute($arguments);
-      return $dotaz->fetch(PDO::FETCH_ASSOC); // jinak to duplikuje data
+
+      if($oneValue == true){
+        return $dotaz->fetchColumn(); // vrátí první sloupec v prvním řádku
+      } else {
+        return $dotaz->fetch(PDO::FETCH_ASSOC); // jinak to duplikuje data
+      }
     }
   }
 ?>

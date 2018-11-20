@@ -1,6 +1,8 @@
 <?php
-  require_once 'vendor/autoload.php';
+  require_once 'vendor/autoload.php'; // twig
+
   require_once 'DB.class.php';
+  require_once 'movie.class.php';
 
   $loader = new Twig_Loader_Filesystem('templates');
   $twig = new Twig_Environment($loader); // no cache
@@ -10,42 +12,19 @@
 
   $database = DB::getInstance();
 
-// JERHOTA
-
 
 
   if(isset($_GET['page'])){
     switch ($_GET['page']) {
       case 'movie':
-        try {
-          // $dotaz = $database->prepare('SELECT film.nazev AS titul, zanr.nazev AS zanr, popis, plakat_url FROM film JOIN zanr ON zanr.idZanr=film.Zanr_idZanr WHERE idFilm=:id');
-          // $dotaz->bindParam(':id',$id);
-          // $id=$_GET['id'];
-          // $dotaz->execute();
-          // $result = $dotaz->fetch(PDO::FETCH_ASSOC); // jinak to duplikuje data
-
-          $result = $database->query('getMovie',array('id' => $_GET['id'] ));
-
-        } catch(PDOException $e){
-          echo "Error: " . $e->getMessage();
-        }
+        $result = new Movie($_GET['id']);
         $sablona='movie.twig';
-        $data['title'] = $result['titul'];
-        $data['poster'] = 'images/movie_posters/'.$result['plakat_url'];
-        $data['info'] = $result['popis'];
-        $data['movieID'] = $id;
-        $data['genre'] = $result['zanr'];
-        $data['actors'] = 'Placeholder actor';
-        $data['comments'] = 'Placeholder comment';
+        $data = (array)$result;
         break;
 
       case 'actor':
         try {
-          $dotaz = $database->prepare('SELECT * FROM herec WHERE idHerec=:id');
-          $dotaz->bindParam(':id',$id);
-          $id=$_GET['id'];
-          $dotaz->execute();
-          $result = $dotaz->fetch(PDO::FETCH_ASSOC); // jinak to duplikuje data
+          $result = $database->query('getActor',array('id' => $_GET['id'] ));
 
           $sablona='actor.twig';
           $data['name'] = $result['jmeno'];

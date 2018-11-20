@@ -3,20 +3,6 @@ let params = new URLSearchParams(window.location.search);
 let movieID = params.get('id');
 let userID = 1;
 
-$.post("favorite.php",
-  {
-    action: "isFav",
-    userID: userID,
-    movieID: movieID
-  },
-  function(data, status){
-    if(data == 1){
-      $("#favBtn").toggleClass("fas");
-      $("#favBtn").toggleClass("far");
-    }
-  }
-);
-
 
 function toggleFav() {
   $("#favBtn").toggleClass("fas");
