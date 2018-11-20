@@ -1,5 +1,6 @@
 <?php
   require_once 'vendor/autoload.php';
+  require_once 'DB.class.php';
 
   $loader = new Twig_Loader_Filesystem('templates');
   $twig = new Twig_Environment($loader); // no cache
@@ -7,18 +8,9 @@
   $userID=1;
   $data = array();
 
-  //DB variables
-  $host="localhost";
-  $dbname="semestralka_db1";
-  $username="root";
-  $password="";
+  $database = DB::getInstance();
 
-  $dns = "mysql:host=$host;dbname=$dbname;charset=utf8"; //charset pro české znaky!
-
-  $db = new PDO($dns,$username,$password);
-  $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
-
+// JERHOTA
 
 
 
@@ -26,11 +18,13 @@
     switch ($_GET['page']) {
       case 'movie':
         try {
-          $dotaz = $db->prepare('SELECT film.nazev AS titul, zanr.nazev AS zanr, plakat_url, popis FROM film JOIN zanr ON zanr.idZanr=film.Zanr_idZanr WHERE idFilm=:id');
-          $dotaz->bindParam(':id',$id);
-          $id=$_GET['id'];
-          $dotaz->execute();
-          $result = $dotaz->fetch(PDO::FETCH_ASSOC); // jinak to duplikuje data
+          // $dotaz = $database->prepare('SELECT film.nazev AS titul, zanr.nazev AS zanr, popis, plakat_url FROM film JOIN zanr ON zanr.idZanr=film.Zanr_idZanr WHERE idFilm=:id');
+          // $dotaz->bindParam(':id',$id);
+          // $id=$_GET['id'];
+          // $dotaz->execute();
+          // $result = $dotaz->fetch(PDO::FETCH_ASSOC); // jinak to duplikuje data
+
+          $result = $database->query('getMovie',array('id' => $_GET['id'] ));
 
         } catch(PDOException $e){
           echo "Error: " . $e->getMessage();
@@ -47,7 +41,7 @@
 
       case 'actor':
         try {
-          $dotaz = $db->prepare('SELECT * FROM herec WHERE idHerec=:id');
+          $dotaz = $database->prepare('SELECT * FROM herec WHERE idHerec=:id');
           $dotaz->bindParam(':id',$id);
           $id=$_GET['id'];
           $dotaz->execute();
