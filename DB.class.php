@@ -1,7 +1,6 @@
 <?php
   class DB{
-
-    public $db;
+    private $db;
     public static $INSTANCE = false;
 
     private static $queries = array(
