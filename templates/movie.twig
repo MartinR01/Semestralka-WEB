@@ -10,7 +10,7 @@
   </div>
   <div class="col-8 col-lg-6">
     <h1>{{ title }}
-      <span onclick="toggleFav()"><i class="{% if isFavorite > 0 %}fas {% else %} far  {% endif %} fa-heart" id="favBtn"></i></span>
+      <span onclick="toggleFav({{id}})"><i class="{% if isFavorite > 0 %}fas {% else %} far  {% endif %} fa-heart" id="favBtn"></i></span>
     </h1>
 
     <h5>({{ genre }})</h5>
@@ -25,7 +25,13 @@
       {{ info | default('no info available')}}
     </div>
     <div class="col-12">
-      {{ actors | default('no actors available')}}
+      {% if actors is not empty %}
+        {% for herec in actors %}
+          <a href="?page=actor&id={{ herec.id }}">{{ herec.jmeno }}</a> ({{herec.role}}),
+        {% endfor %}
+      {% else %}
+        No actors available
+      {% endif %}
     </div>
     <div class="col-12">
       {{ comments | default('no comments available')}}

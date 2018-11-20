@@ -1,10 +1,4 @@
-// check if already favorite
-let params = new URLSearchParams(window.location.search);
-let movieID = params.get('id');
-let userID = 1;
-
-
-function toggleFav() {
+function toggleFav(moiveID) {
   $("#favBtn").toggleClass("fas");
   $("#favBtn").toggleClass("far");
 
