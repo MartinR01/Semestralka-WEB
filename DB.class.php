@@ -11,6 +11,7 @@
       'movieDeleteFav' => 'DELETE FROM oblibene_filmy WHERE Film_idFilm=:movieID AND Uzivatel_idUzivatel=:userID',
       'movieAddFav' => 'INSERT INTO oblibene_filmy (Film_idFilm, Uzivatel_idUzivatel) VALUES (:movieID,:userID)',
       'movieActors' => 'SELECT Herec_idHerec AS id, role, jmeno FROM hraje JOIN herec ON herec.idHerec=hraje.Herec_idHerec WHERE hraje.Film_idFilm=:id',
+      'movieComments' => 'SELECT Uzivatel_idUzivatel, text, datum, uzivatel.jmeno FROM komentar JOIN uzivatel ON uzivatel.idUzivatel=komentar.Uzivatel_idUzivatel WHERE Film_idFilm=:id ORDER BY datum ',
 
       'userFavs' => 'SELECT * FROM oblibene_filmy JOIN film ON film.idFilm=oblibene_filmy.Film_idFilm JOIN zanr ON zanr.idZanr=film.Zanr_idZanr WHERE oblibene_filmy.Uzivatel_idUzivatel=:id',
 

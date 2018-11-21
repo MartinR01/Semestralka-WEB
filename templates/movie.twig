@@ -34,7 +34,15 @@
       {{ info | default('no info available')}}
     </div>
     <div class="col-12">
-      {{ comments | default('no comments available')}}
+        <br/><br/>
+        {% if comments is not empty %}
+            {% for comment in comments %}
+                {{ comment.jmeno }}{{ comment.Uzivatel_idUzivatel }}   {{ comment.datum }}<br/>
+                {{ comment.text }} <br/><br/>
+            {% endfor %}
+        {% else %}
+          No comments available
+        {% endif %}
     </div>
   </div>
 </div>
@@ -43,5 +51,5 @@
 
 
 {% block javascript %}
-  <script src="js\movie.js"></script>
+<script src="js\movie.js"></script>
 {% endblock %}

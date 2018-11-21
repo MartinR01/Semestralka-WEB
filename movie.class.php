@@ -9,6 +9,7 @@
     public $genre;
     public $isFavorite;
     public $actors;
+    public $comments;
 
 
     public function __construct($id){
@@ -25,6 +26,8 @@
       $this->isFavorite = $result;
 
       $this->actors = $db->query('movieActors', array('id' => $id))->fetchAll(PDO::FETCH_ASSOC);
+
+      $this->loadComments();
     }
 
     public function toggleFavorite(){
@@ -34,6 +37,11 @@
         } else {
           $db->query('movieAddFav', array('movieID' => $this->id, 'userID' => 1));
         }
+    }
+
+    public function loadComments(){
+        $db = DB::getInstance();
+        $this->comments = $db->query('movieComments',array('id' => $this->id))->fetchAll(PDO::FETCH_ASSOC);
     }
 
   }

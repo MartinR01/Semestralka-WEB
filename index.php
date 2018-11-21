@@ -2,7 +2,7 @@
   require_once 'vendor/autoload.php'; // twig
 
   require_once 'DB.class.php';
-  require_once 'movie.class.php';
+  require_once 'Movie.class.php';
   require_once 'Actor.class.php';
 
   $loader = new Twig_Loader_Filesystem('templates');
@@ -17,15 +17,16 @@
         $result = new Movie($_GET['id']);
         $sablona='movie.twig';
         $data = (array)$result;
+//         echo '<pre>';
+//           var_dump($result->comments);
+//          echo '</pre>';
         break;
 
       case 'actor':
         $result = new Actor($_GET['id']);
         $sablona='actor.twig';
         $data = (array)$result;
-        // echo '<pre>';
-        //   var_dump($result->movies);
-        //  echo '</pre>';
+
         break;
 
       default:
@@ -36,6 +37,10 @@
     $sablona = "home.twig";
   }
 
-  $template = $twig->loadTemplate($sablona);
-  echo $template->render($data);
+try {
+    echo $twig->render($sablona, $data);
+} catch (Twig_Error_Loader $e) {
+} catch (Twig_Error_Runtime $e) {
+} catch (Twig_Error_Syntax $e) {
+}
 ?>
