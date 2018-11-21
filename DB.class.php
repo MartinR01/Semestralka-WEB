@@ -1,7 +1,7 @@
 <?php
   class DB{
     private $db;
-    public static $INSTANCE = false;
+    public static $INSTANCE;
 
     private static $queries = array(
       'getMovie' => 'SELECT film.nazev AS titul, zanr.nazev AS zanr, popis, plakat_url FROM film JOIN zanr ON zanr.idZanr=film.Zanr_idZanr WHERE idFilm=:id',
@@ -30,6 +30,9 @@
       $this->db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     }
 
+      /**
+       * @return DB database class instance
+       */
     public static function getInstance(){
       if(DB::$INSTANCE == false){
         DB::$INSTANCE = new DB;
@@ -37,7 +40,7 @@
       return DB::$INSTANCE;
     }
 
-    public function query($query, $arguments, $oneValue = false){
+    public function query($query, $arguments){
       $dotaz = $this->db->prepare(self::$queries[$query]);
       $dotaz->execute($arguments);
 

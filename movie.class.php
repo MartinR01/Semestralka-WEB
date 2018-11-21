@@ -27,5 +27,14 @@
       $this->actors = $db->query('movieActors', array('id' => $id))->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function toggleFavorite(){
+        $db = DB::getInstance();
+        if($this->isFavorite == 1){
+          $db->query('movieDeleteFav', array('movieID' => $this->id, 'userID' => 1));
+        } else {
+          $db->query('movieAddFav', array('movieID' => $this->id, 'userID' => 1));
+        }
+    }
+
   }
  ?>
