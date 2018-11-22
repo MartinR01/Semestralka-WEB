@@ -10,7 +10,7 @@
   </div>
   <div class="col-8 col-lg-6">
     <h1>{{ title }}
-      <span onclick="toggleFav({{id}})"><i class="{% if isFavorite > 0 %}fas {% else %} far  {% endif %} fa-heart" id="favBtn"></i></span>
+      <span onclick="toggleFav()"><i class="{% if isFavorite > 0 %}fas {% else %} far  {% endif %} fa-heart" id="favBtn"></i></span>
     </h1>
 
     <h5>({{ genre }})</h5>
@@ -25,7 +25,15 @@
 
   </div>
   <div class="col-12 col-lg-3">
-    {{ rating | default('no rating available')}}
+    Current rating: {{ rating | default('no rating available')}}
+      <div class="form-group row">
+          <label for="rating" class="col-3 col-form-label">Your rating</label>
+          <input class="col-5 form-control" type="number" value="3" min="1" max="5" placeholder="Number of stars" id="rating" required />
+
+          <label for="ratingText">Review:</label>
+          <textarea id="ratingText" class="form-control" placeholder="Write your rating here..."></textarea>
+      </div>
+      <button onclick="rate()" class="btn">Rate</button>
   </div>
 </div>
 <div class="container">
@@ -49,7 +57,7 @@
                 <textarea id="comment" class="form-control" placeholder="Comment here..."></textarea>
             </div>
         </form>
-        <button class="btn" onclick="comment({{ id }})">Comment</button>
+        <button class="btn" onclick="comment()">Comment</button>
 
     </div>
   </div>
