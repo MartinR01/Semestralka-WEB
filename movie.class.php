@@ -10,6 +10,7 @@
     public $isFavorite;
     public $actors;
     public $comments;
+    public $rating;
 
 
     public function __construct($id){
@@ -28,6 +29,8 @@
       $this->actors = $db->query(Query::movieActors, array('id' => $id))->fetchAll(PDO::FETCH_ASSOC);
 
       $this->loadComments();
+
+      $this->rating = $db->query(Query::movieGetAvgRating, array('movieID' => $id))->fetchColumn();
     }
 
     public function toggleFavorite(){
