@@ -17,9 +17,7 @@
         $result = new Movie($_GET['id']);
         $sablona='movie.twig';
         $data = (array)$result;
-//         echo '<pre>';
-//           var_dump($result->comments);
-//          echo '</pre>';
+        $data['userRating'] = DB::getInstance()->query(Query::movieGetUserRating, array('movieID' => $_GET['id'], 'userID' => $userID))->fetchColumn();
         break;
 
       case 'actor':

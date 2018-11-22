@@ -31,7 +31,7 @@
           'movieActors' =>          'SELECT Herec_idHerec AS id, role, jmeno FROM hraje JOIN herec ON herec.idHerec=hraje.Herec_idHerec WHERE hraje.Film_idFilm=:id',
           'movieComments' =>        'SELECT Uzivatel_idUzivatel, text, datum, uzivatel.jmeno FROM komentar JOIN uzivatel ON uzivatel.idUzivatel=komentar.Uzivatel_idUzivatel WHERE Film_idFilm=:id ORDER BY datum ',
           'movieAddComment' =>      'INSERT INTO komentar (Film_idFilm, Uzivatel_idUzivatel, text, datum) VALUES (:movieID, :userID, :text, NOW())',
-          'movieAddRating' =>       'INSERT INTO hodnoceni (Film_idFilm, Uzivatel_idUzivatel, pocet_hvezdicek, text, datum) VALUES (:movieID, :userID, :rating, :text, NOW())',
+          'movieAddRating' =>       'INSERT INTO hodnoceni (Film_idFilm, Uzivatel_idUzivatel, pocet_hvezdicek, text, datum) VALUES (:movieID, :userID, :rating, :text, NOW()) ON DUPLICATE KEY UPDATE pocet_hvezdicek=:rating, text=:text, datum=NOW()',
           'movieGetUserRating' =>   'SELECT pocet_hvezdicek FROM hodnoceni WHERE Uzivatel_idUzivatel=:userID AND Film_idFilm=:movieID',
           'movieGetAvgRating' =>    'SELECT AVG(pocet_hvezdicek) FROM hodnoceni WHERE Film_idFilm=:movieID',
 
