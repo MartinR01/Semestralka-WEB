@@ -13,6 +13,7 @@
 
             if(password_verify($password,$row['heslo'])){
                 $_SESSION['id'] = $row['id'];
+                $_SESSION['username'] = $username;
                 return TRUE;
             } else {
                 return FALSE;
@@ -20,6 +21,7 @@
         }
 
         public function logout(){
+            session_unset();
             session_destroy();
         }
 

@@ -28,6 +28,10 @@
         }
     }
 
+    if(isset($_SESSION['username'])){
+        $data['username'] = $_SESSION['username'];
+    }
+
     // resolve page
     if(isset($_GET['page'])){
         switch ($_GET['page']) {

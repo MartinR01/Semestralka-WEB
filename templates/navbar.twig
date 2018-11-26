@@ -12,13 +12,23 @@
     </button>
 
     <div class="navbar-collapse collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
+      <div class="navbar-nav mr-auto">
         <a class="nav-item nav-link" href="?page=movie&id=1">Movie</a>
         <a class="nav-item nav-link" href="?page=actor&id=1">Actor</a>
-        <a class="nav-item nav-link" href="?page=login">login</a>
-        <a class="nav-item nav-link" href="?page=register">register</a>
-        <a class="nav-item nav-link" href="?action=logout">logout</a>
         <a class="nav-item nav-link" href="?page=testInvalid">Invalid</a>
+
+      </div>
+      <div class="navbar-nav">
+          {% if username is empty %}
+          <a class="nav-item nav-link" href="?page=login">login</a>
+          <a class="nav-item nav-link" href="?page=register">register</a>
+          {% else %}
+          <span class="navbar-text">
+              <i class="fas fa-user-circle"></i>
+              {{username}}
+          </span>
+          <a class="nav-item nav-link" href="?action=logout">logout</a>
+          {% endif %}
       </div>
     </div>
 
