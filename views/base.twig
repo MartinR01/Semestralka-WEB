@@ -3,10 +3,10 @@
     <head>
         <title>{% block title %}{% endblock %} - Movie Database</title>
         <meta charset="utf-8"/>
-        <link rel="stylesheet" href="vendor\components\font-awesome\css\fontawesome-all.min.css">
-        <link rel="stylesheet" href="vendor\twbs\bootstrap\dist\css\bootstrap.min.css">
-        <link rel="stylesheet" href="css\base.css">
-        <link rel="stylesheet" href="css\footer.css">
+        <link rel="stylesheet" href="\movie-db\vendor\components\font-awesome\css\fontawesome-all.min.css">
+        <link rel="stylesheet" href="\movie-db\vendor\twbs\bootstrap\dist\css\bootstrap.min.css">
+        <link rel="stylesheet" href="\movie-db\views\css\base.css">
+        <link rel="stylesheet" href="\movie-db\views\css\footer.css">
         {% block css %}{% endblock %}
     </head>
     <body>
@@ -18,8 +18,8 @@
 
       {% include('footer.twig') %}
 
-      <script src="vendor\components\jquery\jquery.min.js"></script>
-      <script src="vendor\twbs\bootstrap\dist\js\bootstrap.bundle.min.js"></script>
+      <script src="\movie-db\vendor\components\jquery\jquery.min.js"></script>
+      <script src="\movie-db\vendor\twbs\bootstrap\dist\js\bootstrap.bundle.min.js"></script>
       {% block javascript %}{% endblock %}
     </body>
 </html>

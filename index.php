@@ -9,6 +9,9 @@
 
     $data = array();
 
+    $router = new RouterController();
+    echo $router->route($_SERVER['REQUEST_URI']);
+
     // resolve action
     if(isset($_GET['action'])){
         $user = new UserController();
