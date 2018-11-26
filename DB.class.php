@@ -13,6 +13,9 @@
         const movieGetUserRating =  'movieGetUserRating';
         const movieGetAvgRating =   'movieGetAvgRating';
 
+        const registerUser =        'registerUser';
+        const loginUser =           'loginUser';
+
         const userFavs =            'userFavs';
         const actorMovieRoles =     'actorMovieRoles';
     }
@@ -34,6 +37,9 @@
           'movieAddRating' =>       'INSERT INTO hodnoceni (Film_idFilm, Uzivatel_idUzivatel, pocet_hvezdicek, text, datum) VALUES (:movieID, :userID, :rating, :text, NOW()) ON DUPLICATE KEY UPDATE pocet_hvezdicek=:rating, text=:text, datum=NOW()',
           'movieGetUserRating' =>   'SELECT pocet_hvezdicek FROM hodnoceni WHERE Uzivatel_idUzivatel=:userID AND Film_idFilm=:movieID',
           'movieGetAvgRating' =>    'SELECT AVG(pocet_hvezdicek) FROM hodnoceni WHERE Film_idFilm=:movieID',
+
+          'registerUser' =>         'INSERT INTO uzivatel (jmeno, heslo) VALUES (:username, :password)',
+          'loginUser' =>            'SELECT idUzivatel AS id,heslo FROM uzivatel WHERE jmeno=:username',
 
           'userFavs' =>             'SELECT * FROM oblibene_filmy JOIN film ON film.idFilm=oblibene_filmy.Film_idFilm JOIN zanr ON zanr.idZanr=film.Zanr_idZanr WHERE oblibene_filmy.Uzivatel_idUzivatel=:id',
           'actorMovieRoles' =>      'SELECT idFilm AS id, film.nazev AS nazev, role FROM film JOIN hraje ON hraje.Film_idFilm=film.idFilm JOIN zanr ON zanr.idZanr=film.Zanr_idZanr WHERE hraje.Herec_idHerec=:id'

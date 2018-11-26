@@ -26,15 +26,17 @@
   </div>
   <div class="col-12 col-lg-3">
       Current rating: {{ rating | default('no rating available')}}
-      <div class="form-group row">
-          <label for="rating" class="col-form-label">Your rating</label>
-          <input class="form-control" type="number" value="{{ userRating }}" min="1" max="5" placeholder="Number of stars" id="rating" required />
-      </div>
-      <div class="form-group row">
-          <label for="ratingText" class="col-form-label">Review:</label>
-          <textarea id="ratingText" class="form-control" placeholder="Write your rating here..."></textarea>
-      </div>
-      <button onclick="rate()" class="btn">Rate</button>
+      {% if userRating is not empty %}
+          <div class="form-group row">
+              <label for="rating" class="col-form-label">Your rating</label>
+              <input class="form-control" type="number" value="{{ userRating }}" min="1" max="5" placeholder="Number of stars" id="rating" required />
+          </div>
+          <div class="form-group row">
+              <label for="ratingText" class="col-form-label">Review:</label>
+              <textarea id="ratingText" class="form-control" placeholder="Write your rating here..."></textarea>
+          </div>
+          <button onclick="rate()" class="btn">Rate</button>
+      {% endif %}
   </div>
 </div>
 <div class="container">
@@ -46,19 +48,21 @@
         <br/><br/>
         {% if comments is not empty %}
             {% for comment in comments %}
-                {{ comment.jmeno }}{{ comment.Uzivatel_idUzivatel }}   {{ comment.datum }}<br/>
+                {{ comment.jmeno }}  {{ comment.datum }}<br/>
                 {{ comment.text }} <br/><br/>
             {% endfor %}
         {% else %}
           No comments available
         {% endif %}
-        <form>
-            <div class="form-group">
-                <label for="comment">Comment:</label>
-                <textarea id="comment" class="form-control" placeholder="Comment here..."></textarea>
-            </div>
-        </form>
-        <button class="btn" onclick="comment()">Comment</button>
+        {% if userRating is not empty %}
+            <form>
+                <div class="form-group">
+                    <label for="comment">Comment:</label>
+                    <textarea id="comment" class="form-control" placeholder="Comment here..."></textarea>
+                </div>
+            </form>
+            <button class="btn" onclick="comment()">Comment</button>
+        {% endif %}
 
     </div>
   </div>

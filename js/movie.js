@@ -1,6 +1,5 @@
 let params = new URLSearchParams(window.location.search);
 let movieID = params.get('id');
-let userID = 1;
 
 function toggleFav() {
     let btn = $("#favBtn");
@@ -10,7 +9,6 @@ function toggleFav() {
     $.post("ajax.php",
     {
         action: 'favorite',
-        userID: userID,
         movieID: movieID
     },
     function(data, status) {
@@ -26,7 +24,6 @@ function comment() {
     $.post("ajax.php",
         {
             action: 'comment',
-            userID: userID,
             movieID: movieID,
             text: text
         },
@@ -43,7 +40,6 @@ function rate() {
     $.post("ajax.php",
         {
             action: 'rate',
-            userID: userID,
             movieID: movieID,
             rating: rating,
             text: text
