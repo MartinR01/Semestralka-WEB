@@ -9,7 +9,7 @@
         }
 
         public function login($username, $password){
-            $row =  $this->db->query(Query::loginUser, array('username' => $username))->fetch(PDO::FETCH_ASSOC);
+            $row =  $this->db->loginUser($username);
 
             if(password_verify($password,$row['heslo'])){
                 $_SESSION['id'] = $row['id'];
@@ -27,7 +27,7 @@
 
         public function register($username, $password){
             $passHash = password_hash($password, PASSWORD_DEFAULT);
-            $this->db->query(Query::registerUser, array('username' => $username, 'password' => $passHash));
+            $this->db->registerUser($username, $passHash);
             return $this->login($username, $password);
         }
 

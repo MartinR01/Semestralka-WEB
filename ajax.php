@@ -10,12 +10,12 @@ function favorite(){
 
 function comment(){
     $db = DB::getInstance();
-    $db->query(Query::movieAddComment, array('movieID' => $_POST['movieID'], 'userID' => $_SESSION['id'], 'text' => $_POST['text']));
+    $db->movieAddComment($_POST['movieID'], $_SESSION['id'],  $_POST['text']);
 }
 
 function rate(){
     $db = DB::getInstance();
-    $db->query(Query::movieAddRating, array('movieID' => $_POST['movieID'], 'userID' => $_SESSION['id'], 'text' => $_POST['text'], 'rating' => $_POST['rating']));
+    $db->movieAddRating($_POST['movieID'], $_SESSION['id'], $_POST['rating'], $_POST['text']);
 }
 
 // choose correct action

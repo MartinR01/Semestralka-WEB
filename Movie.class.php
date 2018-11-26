@@ -21,34 +21,34 @@
             $this->db = DB::getInstance();
 
             // general info
-            $result = $this->db->query(Query::getMovie,array('id' => $id ))->fetch(PDO::FETCH_ASSOC);
+            $result = $this->db->getMovie($id);
             $this->title = $result['titul'];
             $this->poster = 'images/movie_posters/'.$result['plakat_url'];
             $this->info = $result['popis'];
             $this->genre = $result['zanr'];
 
             // actors
-            $this->actors = $this->db->query(Query::movieActors, array('id' => $id))->fetchAll(PDO::FETCH_ASSOC);
+            $this->actors = $this->db->getMovieActors($id);
             // comments
-            $this->comments = $this->db->query(Query::movieComments,array('id' => $this->id))->fetchAll(PDO::FETCH_ASSOC);
+            $this->comments = $this->db->getMovieComments($id);
             // average rating
-            $this->rating = $this->db->query(Query::movieGetAvgRating, array('movieID' => $id))->fetchColumn();
+            $this->rating = $this->db->getMovieAvgRating($id);
 
 
             // user logged in
             if(isset($_SESSION['id'])){
                 // user rating
-                $this->userRating = DB::getInstance()->query(Query::movieGetUserRating, array('movieID' => $_GET['id'], 'userID' => $_SESSION['id']))->fetchColumn();
+                $this->userRating = $this->db->getMovieUserRating($id, $_SESSION['id']);
                 // favorite
-                $this->isFavorite  = $this->db->query(Query::movieIsFaved, array('userID' => $_SESSION['id'], 'movieID' => $id ))->fetchColumn();
+                $this->isFavorite  = $this->db->isMovieFaved($id, $_SESSION['id']);
             }
         }
 
         public function toggleFavorite(){
             if($this->isFavorite == 1){
-                $this->db->query(Query::movieDeleteFav, array('movieID' => $this->id, 'userID' => $_SESSION['id']));
+                $this->db->movieDeleteFav($this->id, $_SESSION['id']);
             } else {
-                $this->db->query(Query::movieAddFav, array('movieID' => $this->id, 'userID' => $_SESSION['id']));
+                $this->db->movieAddFav($this->id, $_SESSION['id']);
             }
         }
 

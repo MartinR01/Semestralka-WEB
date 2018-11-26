@@ -28,9 +28,6 @@
         }
     }
 
-    if(isset($_SESSION['username'])){
-        $data['username'] = $_SESSION['username'];
-    }
 
     // resolve page
     if(isset($_GET['page'])){
@@ -60,6 +57,11 @@
         }
     }else{
         $sablona = "home.twig";
+    }
+
+    // resolve login
+    if(isset($_SESSION['username'])){
+        $data['username'] = $_SESSION['username'];
     }
 
     try {
