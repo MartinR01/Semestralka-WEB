@@ -1,7 +1,7 @@
 <?php
-    require_once 'DB.class.php';
+    require_once 'models/DB.php';
 
-    class User {
+    class UserController {
         private $db;
 
         public function __construct(){

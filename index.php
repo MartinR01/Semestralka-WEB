@@ -1,20 +1,17 @@
 <?php
-    require_once 'vendor/autoload.php'; // twig
     session_start();
-    require_once 'User.class.php';
-    require_once 'DB.class.php';
-    require_once 'Movie.class.php';
-    require_once 'Actor.class.php';
+    spl_autoload_register("autoload");
+    require_once 'vendor/autoload.php'; // twig
 
 
-    $loader = new Twig_Loader_Filesystem('templates');
+    $loader = new Twig_Loader_Filesystem('views');
     $twig = new Twig_Environment($loader); // no cache
 
     $data = array();
 
     // resolve action
     if(isset($_GET['action'])){
-        $user = new User();
+        $user = new UserController();
         switch ($_GET['action']){
             case 'login':
                 $user->login($_POST['username'], $_POST['password']);
@@ -64,4 +61,15 @@
     } catch (Twig_Error_Runtime $e) {
     } catch (Twig_Error_Syntax $e) {
     }
+
+
+
+function autoload($class){
+    if (preg_match('/Controller$/', $class)){
+        require ('controllers/'.$class.".php");
+    } else {
+        require ('models/'.$class.".php");
+    }
+
+}
 ?>
