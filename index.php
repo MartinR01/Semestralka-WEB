@@ -38,6 +38,7 @@
             case 'register':
                 $user->register($_POST['username'], $_POST['password']);
                 break;
+                
         }
     }
 

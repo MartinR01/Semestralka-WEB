@@ -110,8 +110,8 @@
         return $this->query('actorMovieRoles', compact("actorID"))->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function addActor($actorData){
-        $this->query('addActor', $actorData);
+    public function addActor($name, $bio, $foto_url){
+        $this->query('addActor', compact('name', 'bio', 'foto_url'));
     }
 
     public function addMovie($movieData){

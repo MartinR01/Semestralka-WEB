@@ -3,5 +3,33 @@
 {% block title %}Create{% endblock %}
 
 {% block content %}
+    <form id="formDisplay">
+        <input type="radio" name="form" value="actor"> Actor
+        <input type="radio" name="form" value="movie"> Movie
+    </form>
+    <br>
 
+    <form action="/action_page.php" id="actorForm" method="get">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Actor's full name" required>
+        </div>
+        <div class="form-group">
+            <label for="photo_url">Photo url</label>
+            <input type="text" class="form-control" id="photo_url" placeholder="URL of the actor's photo">
+        </div>
+        <div class="form-group">
+            <label for="bio">Bio</label>
+            <textarea class="form-control" id="bio" rows="5" placeholder="Something about the actor..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <form id="movieForm" method="get">
+
+    </form>
+{% endblock %}
+
+{% block javascript %}
+    <script src="js\create.js"></script>
 {% endblock %}
