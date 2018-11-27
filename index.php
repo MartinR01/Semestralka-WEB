@@ -5,12 +5,25 @@
     require_once 'DB.class.php';
     require_once 'Movie.class.php';
     require_once 'Actor.class.php';
+    require_once 'ContentCreator.php';
 
 
     $loader = new Twig_Loader_Filesystem('templates');
     $twig = new Twig_Environment($loader); // no cache
 
     $data = array();
+//    //test
+//    $data = array('name' => 'test',
+//                    'poster_url' => 'test',
+//                    'info' => 'tohel je test',
+//                    'year' => '2076',
+//                    'country' => 'Great Republic of Kazachstan',
+//                    'genreID' => 1);
+//    $typ = "Movie";
+//
+//    $con = new ContentCreator();
+//    $con->create($typ, $data);
+//    //endtest
 
     // resolve action
     if(isset($_GET['action'])){
@@ -50,6 +63,9 @@
             case 'login':
                 $sablona='login.twig';
                 break;
+            case 'create':
+                $sablona='create.twig';
+                break;
 
             default:
                 $sablona = "home.twig";
@@ -62,6 +78,10 @@
     // resolve login
     if(isset($_SESSION['username'])){
         $data['username'] = $_SESSION['username'];
+
+        if(isset($_SESSION['content_admin'])){
+            $data['content_admin'] = $_SESSION['content_admin'];
+        }
     }
 
     try {

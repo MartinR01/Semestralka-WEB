@@ -1,36 +1,40 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <a class="navbar-brand" href="index.php">MovieDB</a>
+        <a class="navbar-brand" href="index.php">MovieDB</a>
 
-    <!-- for searchbar -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+        <!-- for searchbar -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="navbar-collapse collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav mr-auto">
-        <a class="nav-item nav-link" href="?page=movie&id=1">Movie</a>
-        <a class="nav-item nav-link" href="?page=actor&id=1">Actor</a>
-        <a class="nav-item nav-link" href="?page=testInvalid">Invalid</a>
+        <div class="navbar-collapse collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link" href="?page=movie&id=1">Movie</a>
+                <a class="nav-item nav-link" href="?page=actor&id=1">Actor</a>
+                <a class="nav-item nav-link" href="?page=testInvalid">Invalid</a>
 
-      </div>
-      <div class="navbar-nav">
-          {% if username is empty %}
-          <a class="nav-item nav-link" href="?page=login">login</a>
-          <a class="nav-item nav-link" href="?page=register">register</a>
-          {% else %}
-          <span class="navbar-text">
-              <i class="fas fa-user-circle"></i>
-              {{username}}
-          </span>
-          <a class="nav-item nav-link" href="?action=logout">logout</a>
-          {% endif %}
-      </div>
-    </div>
+                {% if content_admin is defined %}
+                    <a class="nav-item nav-link" href="?page=create"><i class="fas fa-plus-circle"></i></a>
+                {% endif %}
+            </div>
 
-  </nav>
+            <div class="navbar-nav">
+                {% if username is not defined %}
+                <a class="nav-item nav-link" href="?page=login">login</a>
+                <a class="nav-item nav-link" href="?page=register">register</a>
+                {% else %}
+                <span class="navbar-text">
+                    <i class="fas fa-user-circle"></i>
+                    {{username}}
+                </span>
+                <a class="nav-item nav-link" href="?action=logout">logout</a>
+                {% endif %}
+            </div>
+        </div>
+
+    </nav>
 </header>

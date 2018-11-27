@@ -18,17 +18,20 @@
           'movieGetAvgRating' =>    'SELECT AVG(pocet_hvezdicek) FROM hodnoceni WHERE Film_idFilm=:movieID',
 
           'registerUser' =>         'INSERT INTO uzivatel (jmeno, heslo) VALUES (:username, :password)',
-          'loginUser' =>            'SELECT idUzivatel AS id,heslo FROM uzivatel WHERE jmeno=:username',
+          'loginUser' =>            'SELECT idUzivatel AS id, heslo, content_admin FROM uzivatel WHERE jmeno=:username',
 
           'userFavs' =>             'SELECT * FROM oblibene_filmy JOIN film ON film.idFilm=oblibene_filmy.Film_idFilm JOIN zanr ON zanr.idZanr=film.Zanr_idZanr WHERE oblibene_filmy.Uzivatel_idUzivatel=:userID',
-          'actorMovieRoles' =>      'SELECT idFilm AS id, film.nazev AS nazev, role FROM film JOIN hraje ON hraje.Film_idFilm=film.idFilm JOIN zanr ON zanr.idZanr=film.Zanr_idZanr WHERE hraje.Herec_idHerec=:actorID'
+          'actorMovieRoles' =>      'SELECT idFilm AS id, film.nazev AS nazev, role FROM film JOIN hraje ON hraje.Film_idFilm=film.idFilm JOIN zanr ON zanr.idZanr=film.Zanr_idZanr WHERE hraje.Herec_idHerec=:actorID',
+
+          'addActor' =>             'INSERT INTO herec (jmeno, bio, foto_url) VALUES (:name, :bio, :foto_url)',
+          'addMovie' =>             'INSERT INTO film (nazev, plakat_url, popis, rok, zeme_puvodu, Zanr_idZanr) VALUES (:name, :poster_url, :info, :year, :country, :genreID)'
       );
 
 
     private function __construct(){
       //DB variables
       $host="localhost";
-      $dbname="semestralka_db1";
+      $dbname="semestralka";
       $username="root";
       $password="";
       $dns = "mysql:host=$host;dbname=$dbname;charset=utf8"; //charset pro české znaky!
@@ -105,6 +108,14 @@
 
     public function getActorRoles($actorID){
         return $this->query('actorMovieRoles', compact("actorID"))->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function addActor($actorData){
+        $this->query('addActor', $actorData);
+    }
+
+    public function addMovie($movieData){
+        $this->query('addMovie', $movieData);
     }
 
     private function query($query, $arguments){

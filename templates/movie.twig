@@ -26,7 +26,7 @@
   </div>
   <div class="col-12 col-lg-3">
       Current rating: {{ rating | default('no rating available')}}
-      {% if userRating is not empty %}
+      {% if username is defined %}
           <div class="form-group row">
               <label for="rating" class="col-form-label">Your rating</label>
               <input class="form-control" type="number" value="{{ userRating }}" min="1" max="5" placeholder="Number of stars" id="rating" required />
@@ -54,7 +54,7 @@
         {% else %}
           No comments available
         {% endif %}
-        {% if userRating is not empty %}
+        {% if username is defined %}
             <form>
                 <div class="form-group">
                     <label for="comment">Comment:</label>

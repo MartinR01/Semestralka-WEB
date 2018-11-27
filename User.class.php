@@ -10,10 +10,13 @@
 
         public function login($username, $password){
             $row =  $this->db->loginUser($username);
-
             if(password_verify($password,$row['heslo'])){
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['username'] = $username;
+                // is admin
+                if ($row['content_admin'] == TRUE){
+                    $_SESSION['content_admin'] = TRUE;
+                }
                 return TRUE;
             } else {
                 return FALSE;
