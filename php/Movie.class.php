@@ -52,5 +52,10 @@
             }
         }
 
+        public static function createMovie($name, $poster_url, $description, $year, $country, $genreID){
+            $db = DB::getInstance();
+            $db->addMovie($name, $poster_url, $description, $year, $country, $genreID);
+        }
+
     }
  ?>

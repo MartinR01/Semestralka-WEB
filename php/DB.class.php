@@ -24,7 +24,7 @@
           'actorMovieRoles' =>      'SELECT idFilm AS id, film.nazev AS nazev, role FROM film JOIN hraje ON hraje.Film_idFilm=film.idFilm JOIN zanr ON zanr.idZanr=film.Zanr_idZanr WHERE hraje.Herec_idHerec=:actorID',
 
           'addActor' =>             'INSERT INTO herec (jmeno, bio, foto_url) VALUES (:name, :bio, :foto_url)',
-          'addMovie' =>             'INSERT INTO film (nazev, plakat_url, popis, rok, zeme_puvodu, Zanr_idZanr) VALUES (:name, :poster_url, :info, :year, :country, :genreID)'
+          'addMovie' =>             'INSERT INTO film (nazev, plakat_url, popis, rok, zeme_puvodu, Zanr_idZanr) VALUES (:name, :poster_url, :description, :year, :country, :genreID)'
       );
 
 
@@ -114,8 +114,8 @@
         $this->query('addActor', compact('name', 'bio', 'foto_url'));
     }
 
-    public function addMovie($movieData){
-        $this->query('addMovie', $movieData);
+    public function addMovie($name, $poster_url, $description, $year, $country, $genreID){
+        $this->query('addMovie', compact('name', 'poster_url', 'description', 'year', 'country', 'genreID'));
     }
 
     private function query($query, $arguments){

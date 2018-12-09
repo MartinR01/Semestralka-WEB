@@ -16,7 +16,7 @@
             <input type="text" class="form-control" id="name" name="name" placeholder="Actor's full name" required>
         </div>
         <div class="form-group">
-            <label for="photo_url">Photo</label>
+            <label for="photo">Photo</label>
             <input type="file" accept="image/*" class="form-control" id="photo" name="photo" placeholder="Actor's photo">
         </div>
         <div class="form-group">
@@ -26,8 +26,33 @@
         <input type="submit" class="btn btn-primary" value="Submit">
     </form>
 
-    <form id="movieForm" method="get">
-
+    <form action="index.php" id="movieForm" method="post" enctype="multipart/form-data" style="display:none;">
+        <input type="hidden" name="action" value="createMovie" />
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Movie's full name" required>
+        </div>
+        <div class="form-group">
+            <label for="poster">Poster</label>
+            <input type="file" accept="image/*" class="form-control" id="poster" name="poster" placeholder="Movie poster">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="5" placeholder="Something about the movie..."></textarea>
+        </div>
+        <div class="form-group">
+            <label for="year">Year</label>
+            <input type="number" class="form-control" id="year" name="year" placeholder="year of filming" min="1850" max="2050" step="1" value="{{ currentYear | default(2018)}}"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" class="form-control" id="country" name="country" placeholder="Country of origin" required>
+        </div>
+        <div class="form-group">
+            <label for="genreID">genreID</label>
+            <input type="number" class="form-control" id="genreID" name="genreID" placeholder="genreID" min="1" max="5" step="1"></textarea>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit">
     </form>
 {% endblock %}
 

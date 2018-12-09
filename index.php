@@ -1,30 +1,18 @@
 <?php
     require_once 'vendor/autoload.php'; // twig
     session_start();
-    require_once 'User.class.php';
-    require_once 'DB.class.php';
-    require_once 'Movie.class.php';
-    require_once 'Actor.class.php';
-    require_once 'ContentCreator.php';
-    require_once 'FileProcessor.class.php';
+    require_once 'php/User.class.php';
+    require_once 'php/DB.class.php';
+    require_once 'php/Movie.class.php';
+    require_once 'php/Actor.class.php';
+    require_once 'php/ContentCreator.php';
+    require_once 'php/FileProcessor.class.php';
 
 
     $loader = new Twig_Loader_Filesystem('templates');
     $twig = new Twig_Environment($loader); // no cache
 
     $data = array();
-//    //test
-//    $data = array('name' => 'test',
-//                    'poster_url' => 'test',
-//                    'info' => 'tohel je test',
-//                    'year' => '2076',
-//                    'country' => 'Great Republic of Kazachstan',
-//                    'genreID' => 1);
-//    $typ = "Movie";
-//
-//    $con = new ContentCreator();
-//    $con->create($typ, $data);
-//    //endtest
 
     // resolve action
     if(isset($_POST['action'])){
@@ -41,6 +29,9 @@
                 break;
             case 'createActor':
                 Actor::createActor($_POST['name'], FileProcessor::process("photo", FileProcessor::ACTOR), $_POST['bio']);
+                break;
+            case 'createMovie':
+                Movie::createMovie($_POST['name'],FileProcessor::process("poster", FileProcessor::MOVIE),$_POST['description'],$_POST['year'],$_POST['country'],$_POST['genreID']);
                 break;
                 
         }

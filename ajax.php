@@ -1,5 +1,5 @@
 <?php
-require_once 'Movie.class.php';
+require_once 'php/Movie.class.php';
 session_start();
 
 
