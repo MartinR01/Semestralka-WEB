@@ -6,6 +6,7 @@
     require_once 'Movie.class.php';
     require_once 'Actor.class.php';
     require_once 'ContentCreator.php';
+    require_once 'FileProcessor.class.php';
 
 
     $loader = new Twig_Loader_Filesystem('templates');
@@ -26,9 +27,9 @@
 //    //endtest
 
     // resolve action
-    if(isset($_GET['action'])){
+    if(isset($_POST['action'])){
         $user = new User();
-        switch ($_GET['action']){
+        switch ($_POST['action']){
             case 'login':
                 $user->login($_POST['username'], $_POST['password']);
                 break;
@@ -37,6 +38,9 @@
                 break;
             case 'register':
                 $user->register($_POST['username'], $_POST['password']);
+                break;
+            case 'createActor':
+                Actor::createActor($_POST['name'], FileProcessor::process("photo", FileProcessor::ACTOR), $_POST['bio']);
                 break;
                 
         }

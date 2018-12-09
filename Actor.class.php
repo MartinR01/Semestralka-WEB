@@ -13,9 +13,14 @@
 
       $this->name = $data['jmeno'];
       $this->bio = $data['bio'];
-      $this->photo = 'images/actors/'.$data['foto_url'];
+      $this->photo = 'images/actor/'.$data['foto_url'];
 
       $this->movies = $db->getActorRoles($id);
+    }
+
+    public static function createActor($name, $photo_url, $bio){
+      $db = DB::getInstance();
+      $db->addActor($name, $bio, $photo_url);
     }
   }
 ?>
