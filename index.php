@@ -15,9 +15,10 @@
     $data = array();
 
     // resolve action
-    if(isset($_POST['action'])){
+    // předělat na get - jinak nefunguje odhlasovani
+    if(isset($_GET['action'])){
         $user = new User();
-        switch ($_POST['action']){
+        switch ($_GET['action']){
             case 'login':
                 $user->login($_POST['username'], $_POST['password']);
                 break;
@@ -28,12 +29,11 @@
                 $user->register($_POST['username'], $_POST['password']);
                 break;
             case 'createActor':
-                Actor::createActor($_POST['name'], FileProcessor::process("photo", FileProcessor::ACTOR), $_POST['bio']);
+                Actor::createActor($_POST['name'], FileProcessor::process("photo", FileProcessor::ACTOR), $_POST['bio'], $_POST['movies']);
                 break;
             case 'createMovie':
-                Movie::createMovie($_POST['name'],FileProcessor::process("poster", FileProcessor::MOVIE),$_POST['description'],$_POST['year'],$_POST['country'],$_POST['genreID']);
+                Movie::createMovie($_POST['name'],FileProcessor::process("poster", FileProcessor::MOVIE),$_POST['description'],$_POST['year'],$_POST['country'],$_POST['genreID'],$_POST['actors']);
                 break;
-                
         }
     }
 
@@ -60,6 +60,10 @@
                 $sablona='login.twig';
                 break;
             case 'create':
+                $db = DB::getInstance();
+                $data['genres'] = $db->getGenres();
+                $data['movies'] = $db->getMovies();
+                $data['actors'] = $db->getActors();
                 $sablona='create.twig';
                 break;
 

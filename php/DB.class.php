@@ -24,7 +24,11 @@
           'actorMovieRoles' =>      'SELECT idFilm AS id, film.nazev AS nazev, role FROM film JOIN hraje ON hraje.Film_idFilm=film.idFilm JOIN zanr ON zanr.idZanr=film.Zanr_idZanr WHERE hraje.Herec_idHerec=:actorID',
 
           'addActor' =>             'INSERT INTO herec (jmeno, bio, foto_url) VALUES (:name, :bio, :foto_url)',
-          'addMovie' =>             'INSERT INTO film (nazev, plakat_url, popis, rok, zeme_puvodu, Zanr_idZanr) VALUES (:name, :poster_url, :description, :year, :country, :genreID)'
+          'addMovie' =>             'INSERT INTO film (nazev, plakat_url, popis, rok, zeme_puvodu, Zanr_idZanr) VALUES (:name, :poster_url, :description, :year, :country, :genreID)',
+          'getGenres' =>            'SELECT idZanr AS id, nazev AS name FROM zanr',
+          'getMovies' =>            'SELECT idFilm AS id, nazev AS name FROM film',
+          'getActors' =>            'SELECT idHerec AS id, jmeno AS name FROM herec',
+          'addRole' =>              'INSERT INTO hraje (Herec_idHerec, Film_idFilm, role) VALUES (:actorID, :movieID, :role)'
       );
 
 
@@ -110,15 +114,34 @@
         return $this->query('actorMovieRoles', compact("actorID"))->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
+    public function getGenres(){
+        return $this->query('getGenres')->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getMovies(){
+      return $this->query('getMovies')->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getActors(){
+      return $this->query('getActors')->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function addActor($name, $bio, $foto_url){
         $this->query('addActor', compact('name', 'bio', 'foto_url'));
+        return $this->db->lastInsertId();
     }
 
     public function addMovie($name, $poster_url, $description, $year, $country, $genreID){
         $this->query('addMovie', compact('name', 'poster_url', 'description', 'year', 'country', 'genreID'));
+        return $this->db->lastInsertId();
     }
 
-    private function query($query, $arguments){
+    public function addRole($actorID, $movieID, $role){
+        $this->query('addRole', compact('actorID', 'movieID', 'role'));
+    }
+
+    private function query($query, $arguments=array()){
         $dotaz = $this->db->prepare(self::$queries[$query]);
         $dotaz->execute($arguments);
 

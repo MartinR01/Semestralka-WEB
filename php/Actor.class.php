@@ -18,9 +18,20 @@
       $this->movies = $db->getActorRoles($id);
     }
 
-    public static function createActor($name, $photo_url, $bio){
+    public static function createActor($name, $photo_url, $bio, $movies){
       $db = DB::getInstance();
-      $db->addActor($name, $bio, $photo_url);
+      $insertID = $db->addActor($name, $bio, $photo_url);
+        foreach ($movies as $movie){
+            if($movie['id'] != null){
+                $db->addRole($insertID, $movie['id'], $movie['role']);
+            }
+        }
+        header("Location: index.php?page=actor&id=".$insertID);
+    }
+
+    public static function addRole($roles){
+        $db = DB::getInstance();
+
     }
   }
 ?>

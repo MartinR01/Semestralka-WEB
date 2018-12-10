@@ -9,7 +9,7 @@
     </form>
     <br>
 
-    <form action="index.php" id="actorForm" method="post" enctype="multipart/form-data">
+    <form action="index.php?action=createActor" id="actorForm" method="post" enctype="multipart/form-data">
         <input type="hidden" name="action" value="createActor" />
         <div class="form-group">
             <label for="name">Name</label>
@@ -23,10 +23,21 @@
             <label for="bio">Bio</label>
             <textarea class="form-control" id="bio" name="bio" rows="5" placeholder="Something about the actor..."></textarea>
         </div>
+        {% for i in 0..9 %}
+            <div class="form-group form-row">
+                <select id="movieIDs" name="movies[{{i}}][id]" class="form-control col-6">
+                    <option disabled selected value> -- select a movie -- </option>
+                    {% for movie in movies %}
+                        <option value="{{ movie.id }}">{{ movie.name }}</option>
+                    {% endfor %}
+                </select>
+                <input type="text" name="movies[{{i}}][role]" class="form-control col-6" placeholder="role" />
+            </div>
+        {% endfor %}
         <input type="submit" class="btn btn-primary" value="Submit">
     </form>
 
-    <form action="index.php" id="movieForm" method="post" enctype="multipart/form-data" style="display:none;">
+    <form action="index.php?action=createMovie" id="movieForm" method="post" enctype="multipart/form-data" style="display:none;">
         <input type="hidden" name="action" value="createMovie" />
         <div class="form-group">
             <label for="name">Name</label>
@@ -49,9 +60,25 @@
             <input type="text" class="form-control" id="country" name="country" placeholder="Country of origin" required>
         </div>
         <div class="form-group">
-            <label for="genreID">genreID</label>
-            <input type="number" class="form-control" id="genreID" name="genreID" placeholder="genreID" min="1" max="5" step="1"></textarea>
+            <label for="genre">Genre</label>
+            <select id="genre" name="genreID" class="form-control">
+                {% for genre in genres %}
+                    <option value="{{ genre.id }}">{{ genre.name }}</option>
+                {% endfor %}
+            </select>
         </div>
+            {% for i in 0..9 %}
+                <div class="form-group form-row">
+                    <select id="actorIDs" name="actors[{{i}}][id]" class="form-control col-6">
+                        <option disabled selected value> -- select an actor -- </option>
+                        {% for actor in actors %}
+                            <option value="{{ actor.id }}">{{ actor.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="text" name="actors[{{i}}][role]" class="form-control col-6" placeholder="role" />
+                </div>
+            {% endfor %}
+
         <input type="submit" class="btn btn-primary" value="Submit">
     </form>
 {% endblock %}

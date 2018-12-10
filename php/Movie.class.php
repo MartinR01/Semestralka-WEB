@@ -52,9 +52,16 @@
             }
         }
 
-        public static function createMovie($name, $poster_url, $description, $year, $country, $genreID){
+        public static function createMovie($name, $poster_url, $description, $year, $country, $genreID, $actors){
+            var_dump($actors);
             $db = DB::getInstance();
-            $db->addMovie($name, $poster_url, $description, $year, $country, $genreID);
+            $insertID = $db->addMovie($name, $poster_url, $description, $year, $country, $genreID);
+            foreach ($actors as $actor){
+                if($actor['id'] != null){
+                    $db->addRole($actor['id'], $insertID, $actor['role']);
+                }
+            }
+            header("Location: index.php?page=movie&id=".$insertID);
         }
 
     }
