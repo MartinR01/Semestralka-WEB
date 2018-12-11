@@ -13,9 +13,11 @@
 
         <div class="navbar-collapse collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav mr-auto">
-                <a class="nav-item nav-link" href="?page=movie&id=1">Movie</a>
-                <a class="nav-item nav-link" href="?page=actor&id=1">Actor</a>
-                <a class="nav-item nav-link" href="?page=testInvalid">Invalid</a>
+                {% if username is defined %}
+                    <a class="nav-item nav-link" href="?page=favMovieList">Favorites</a>
+                {% endif %}
+                <a class="nav-item nav-link" href="?page=actorList">Actors</a>
+                <a class="nav-item nav-link" href="?page=movieList">Movies</a>
 
                 {% if content_admin is defined %}
                     <a class="nav-item nav-link" href="?page=create"><i class="fas fa-plus-circle"></i></a>

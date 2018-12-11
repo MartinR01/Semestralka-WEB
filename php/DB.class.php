@@ -20,7 +20,7 @@
           'registerUser' =>         'INSERT INTO uzivatel (jmeno, heslo) VALUES (:username, :password)',
           'loginUser' =>            'SELECT idUzivatel AS id, heslo, content_admin FROM uzivatel WHERE jmeno=:username',
 
-          'userFavs' =>             'SELECT * FROM oblibene_filmy JOIN film ON film.idFilm=oblibene_filmy.Film_idFilm JOIN zanr ON zanr.idZanr=film.Zanr_idZanr WHERE oblibene_filmy.Uzivatel_idUzivatel=:userID',
+          'userFavs' =>             'SELECT idFilm AS id, film.nazev AS name, rok AS year, zanr.nazev AS genre, plakat_url AS poster_url  FROM oblibene_filmy JOIN film ON film.idFilm=oblibene_filmy.Film_idFilm JOIN zanr ON zanr.idZanr=film.Zanr_idZanr WHERE oblibene_filmy.Uzivatel_idUzivatel=:userID',
           'actorMovieRoles' =>      'SELECT idFilm AS id, film.nazev AS nazev, role FROM film JOIN hraje ON hraje.Film_idFilm=film.idFilm JOIN zanr ON zanr.idZanr=film.Zanr_idZanr WHERE hraje.Herec_idHerec=:actorID',
 
           'addActor' =>             'INSERT INTO herec (jmeno, bio, foto_url) VALUES (:name, :bio, :foto_url)',
@@ -107,7 +107,7 @@
     }
 
     public function getUserFavs($userID){
-        return $this->query('userFavs', compact("userID"))->fetch(PDO::FETCH_ASSOC);
+        return $this->query('userFavs', compact("userID"))->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getActorRoles($actorID){

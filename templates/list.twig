@@ -1,0 +1,19 @@
+{% extends 'base.twig' %}
+
+{% block title %}List of {{itemType}}s{% endblock %}
+{% block css %}{% endblock %}
+
+{% block content %}
+    <ul class="list-group">
+        {% for item in list %}
+            <li class="list-group-item">
+                <a href="?page={{itemType}}&id={{item.id}}">{{item.name}}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
+
+
+{% block javascript %}
+{% endblock %}

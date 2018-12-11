@@ -47,6 +47,24 @@
                 $data = (array)$result; // posila to i id lidi v komentech. to nechceš
                 break;
 
+            case 'favMovieList':
+                $sablona = 'list.twig';
+                $data['list'] = DB::getInstance()->getUserFavs($_SESSION['id']);
+                $data['itemType'] = "movie";
+                break;
+
+            case 'movieList':
+                $sablona = 'list.twig';
+                $data['list'] = DB::getInstance()->getMovies();
+                $data['itemType'] = "movie";
+                break;
+
+            case 'actorList':
+                $sablona = 'list.twig';
+                $data['list'] = DB::getInstance()->getActors();
+                $data['itemType'] = "actor";
+                break;
+
             case 'actor':
                 $result = new Actor($_GET['id']);
                 $sablona='actor.twig';

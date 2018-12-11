@@ -24,7 +24,6 @@
         }
 
         public function logout(){
-            echo "lgoutou";
             session_unset();
             session_destroy();
         }
