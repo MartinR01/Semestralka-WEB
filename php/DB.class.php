@@ -26,8 +26,8 @@
           'addActor' =>             'INSERT INTO herec (jmeno, bio, foto_url) VALUES (:name, :bio, :foto_url)',
           'addMovie' =>             'INSERT INTO film (nazev, plakat_url, popis, rok, zeme_puvodu, Zanr_idZanr) VALUES (:name, :poster_url, :description, :year, :country, :genreID)',
           'getGenres' =>            'SELECT idZanr AS id, nazev AS name FROM zanr',
-          'getMovies' =>            'SELECT idFilm AS id, nazev AS name FROM film',
-          'getActors' =>            'SELECT idHerec AS id, jmeno AS name FROM herec',
+          'getMovies' =>            'SELECT idFilm AS id, nazev AS name, plakat_url AS image FROM film',
+          'getActors' =>            'SELECT idHerec AS id, jmeno AS name, foto_url AS image FROM herec',
           'addRole' =>              'INSERT INTO hraje (Herec_idHerec, Film_idFilm, role) VALUES (:actorID, :movieID, :role)'
       );
 

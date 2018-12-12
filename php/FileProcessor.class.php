@@ -15,7 +15,7 @@ abstract class fileProcessor{
             echo "Sorry, there was an error uploading your file.";
         }
 
-        return basename($_FILES[$filename]["name"]);
+        return $target_file;
     }
 
 }

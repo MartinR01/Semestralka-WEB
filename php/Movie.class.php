@@ -23,7 +23,7 @@
             // general info
             $result = $this->db->getMovie($id);
             $this->title = $result['titul'];
-            $this->poster = 'images/movie/'.$result['plakat_url'];
+            $this->poster = $result['plakat_url'];
             $this->info = $result['popis'];
             $this->genre = $result['zanr'];
 

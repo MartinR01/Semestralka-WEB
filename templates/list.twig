@@ -7,7 +7,10 @@
     <ul class="list-group">
         {% for item in list %}
             <li class="list-group-item">
-                <a href="?page={{itemType}}&id={{item.id}}">{{item.name}}</a>
+                {% set link = '?page=' ~ itemType ~ '&id=' ~ item.id %}    
+                {% set posterVars = {'imgSrc' : item.image, 'link' : link} %}
+                {% include 'posterView.twig' with posterVars only %}
+                <a href="{{ link }}">{{item.name}}</a>
             </li>
         {% endfor %}
     </ul>

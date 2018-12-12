@@ -13,7 +13,7 @@
 
       $this->name = $data['jmeno'];
       $this->bio = $data['bio'];
-      $this->photo = 'images/actor/'.$data['foto_url'];
+      $this->photo = $data['foto_url'];
 
       $this->movies = $db->getActorRoles($id);
     }

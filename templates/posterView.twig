@@ -1,0 +1,7 @@
+{% if imgSrc is empty %}
+    {% set imgSrc = 'images/not_found.jpeg' %}
+{% endif %}
+
+<a href="{{link}}">
+    <img src="{{imgSrc}}" alt="" width="75px" height="100px" />
+</a>

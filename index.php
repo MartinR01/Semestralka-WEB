@@ -49,6 +49,7 @@
 
             case 'favMovieList':
                 $sablona = 'list.twig';
+
                 $data['list'] = DB::getInstance()->getUserFavs($_SESSION['id']);
                 $data['itemType'] = "movie";
                 break;
