@@ -1,0 +1,21 @@
+{% macro css() %}
+    <link rel="stylesheet" href="css\list.css">
+{% endmacro %}
+
+{% macro list(items, itemType) %}
+    <div class="list row">
+        {% for item in items %}
+            <div class="col-2 p-1">
+                {% set link = '?page=' ~ itemType ~ '&id=' ~ item.id %}
+                {% set posterVars = {'imgSrc' : item.image, 'link' : link, 'name': item.name} %}
+                {% include 'posterView.twig' with posterVars only %}
+            </div>
+        {% endfor %}
+    </div>
+
+{% endmacro %}
+
+
+{% macro javascript() %}
+    <script src="js/list.js"></script>
+{% endmacro %}

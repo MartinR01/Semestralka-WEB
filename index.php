@@ -87,10 +87,16 @@
                 break;
 
             default:
+                $db = DB::getInstance();
+                $data['movies'] = $db->getMovies();
+                $data['actors'] = $db->getActors();
                 $sablona = "home.twig";
                 break;
         }
     }else{
+        $db = DB::getInstance();
+        $data['movies'] = $db->getMovies();
+        $data['actors'] = $db->getActors();
         $sablona = "home.twig";
     }
 

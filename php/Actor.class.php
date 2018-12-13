@@ -28,10 +28,6 @@
         }
         header("Location: index.php?page=actor&id=".$insertID);
     }
-
-    public static function addRole($roles){
-        $db = DB::getInstance();
-
-    }
+    
   }
 ?>

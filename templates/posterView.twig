@@ -3,5 +3,9 @@
 {% endif %}
 
 <a href="{{link}}">
-    <img src="{{imgSrc}}" alt="" width="75px" height="100px" />
+    <div class="posterParent shadow hoverable" style="background-image: url('{{ imgSrc }}')">
+        <div class="img-overlay">
+            <h3>{{ name }}</h3>
+        </div>
+    </div>
 </a>
