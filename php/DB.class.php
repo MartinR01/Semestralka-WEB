@@ -28,7 +28,11 @@
           'getGenres' =>            'SELECT idZanr AS id, nazev AS name FROM zanr',
           'getMovies' =>            'SELECT idFilm AS id, nazev AS name, plakat_url AS image FROM film',
           'getActors' =>            'SELECT idHerec AS id, jmeno AS name, foto_url AS image FROM herec',
-          'addRole' =>              'INSERT INTO hraje (Herec_idHerec, Film_idFilm, role) VALUES (:actorID, :movieID, :role)'
+          'addRole' =>              'INSERT INTO hraje (Herec_idHerec, Film_idFilm, role) VALUES (:actorID, :movieID, :role)',
+
+          'getUsers' =>             'SELECT idUzivatel AS id, jmeno AS name, content_admin FROM uzivatel',
+          'toggleAdmin' =>          'UPDATE uzivatel SET content_admin = CASE WHEN content_admin = 1 THEN 0 ELSE 1 END WHERE idUzivatel=:userID',
+          'deleteUser' =>           'DELETE FROM uzivatel WHERE idUzivatel=:userID'
       );
 
 
@@ -139,6 +143,18 @@
 
     public function addRole($actorID, $movieID, $role){
         $this->query('addRole', compact('actorID', 'movieID', 'role'));
+    }
+
+    public function getUsers(){
+        return $this->query('getUsers')->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function toggleAdmin($userID){
+        $this->query('toggleAdmin', compact( 'userID'));
+    }
+
+    public function deleteUser($userID){
+        $this->query('deleteUser', compact('userID'));
     }
 
     private function query($query, $arguments=array()){

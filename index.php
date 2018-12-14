@@ -79,12 +79,21 @@
                 $sablona='login.twig';
                 break;
             case 'create':
-                $db = DB::getInstance();
-                $data['genres'] = $db->getGenres();
-                $data['movies'] = $db->getMovies();
-                $data['actors'] = $db->getActors();
-                $sablona='create.twig';
-                break;
+                if( isset($_SESSION['content_admin'])){
+                    $db = DB::getInstance();
+                    $data['genres'] = $db->getGenres();
+                    $data['movies'] = $db->getMovies();
+                    $data['actors'] = $db->getActors();
+                    $sablona='create.twig';
+                    break;
+                }
+
+            case 'users':
+                if (isset($_SESSION['content_admin'])){
+                    $sablona='users.twig';
+                    $data['users'] = User::getUsers();
+                    break;
+                }
 
             default:
                 $db = DB::getInstance();

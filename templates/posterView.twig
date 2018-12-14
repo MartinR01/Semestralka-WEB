@@ -1,9 +1,5 @@
-{% if imgSrc is empty %}
-    {% set imgSrc = 'images/not_found.jpeg' %}
-{% endif %}
-
 <a href="{{link}}">
-    <div class="posterParent shadow hoverable" style="background-image: url('{{ imgSrc }}')">
+    <div class="posterParent shadow hoverable" style="background-image: url('{{ imgSrc | default('images/not_found.jpeg') }}')">
         <div class="img-overlay">
             <h3>{{ name }}</h3>
         </div>

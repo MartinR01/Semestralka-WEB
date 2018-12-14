@@ -34,6 +34,28 @@
             return $this->login($username, $password);
         }
 
+        public static function getUsers(){
+            $db=DB::getInstance();
+            return $db->getUsers();
+        }
+
+        public static function deleteUser($userID){
+            if($userID != $_SESSION['id']){
+                DB::getInstance()->deleteUser($userID);
+            }
+        }
+
+        public static function toggleAdmin($userID){
+            if($userID != $_SESSION['id']){
+                DB::getInstance()->toggleAdmin($userID);
+                $response['status']='success';
+            } else {
+                $response['status']='error';
+                $response['message']="you can't remove your own admin rights";
+            }
+            echo json_encode($response);
+        }
+
     }
 
 
