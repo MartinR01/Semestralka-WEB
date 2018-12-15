@@ -64,5 +64,16 @@
             header("Location: index.php?page=movie&id=".$insertID);
         }
 
+        public static function addRating($movieID, $rating, $text){
+            if($rating >= 1 && $rating <= 5){
+                DB::getInstance()->movieAddRating($movieID,$_SESSION['id'], $rating, $text);
+                $response['status']='success';
+            } else {
+                $response['status']='error';
+                $response['message']="Rating must be between 1 and 5 stars!";
+            }
+            echo json_encode($response);
+        }
+
     }
  ?>

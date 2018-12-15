@@ -15,12 +15,11 @@ function comment(){
 }
 
 function rate(){
-    $db = DB::getInstance();
-    $db->movieAddRating($_POST['movieID'], $_SESSION['id'], $_POST['rating'], $_POST['text']);
+    return Movie::addRating($_POST['movieID'], $_POST['rating'], $_POST['text']);
 }
 
 function deleteUser(){
-    User::deleteUser($_POST['userID']);
+    return User::deleteUser($_POST['userID']);
 }
 
 function toggleAdmin(){

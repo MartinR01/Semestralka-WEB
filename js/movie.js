@@ -45,7 +45,12 @@ function rate() {
             text: text
         },
         function(data, status) {
-            location.reload();
+            var response = $.parseJSON(data);
+            if(response.status == 'success'){
+                location.reload();
+            }else{
+                alert(response.message);
+            }
         }
     );
 }

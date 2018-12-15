@@ -5,7 +5,13 @@ function deleteUser(userID){
         userID: userID
     },
     function(data, status) {
-        location.reload();
+        var response = $.parseJSON(data);
+        if(response.status == 'success'){
+            location.reload();
+            // target.toggleClass("fa-toggle-off");
+        }else{
+            alert(response.message);
+        }
     });
 }
 function toggleAdmin(userID){

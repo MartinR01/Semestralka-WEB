@@ -4,6 +4,7 @@
     "twig/twig": "^2.0",
     "components/jquery": "^3.3",
     "components/font-awesome": "^5.4",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "ext-json": "*"
   }
 }

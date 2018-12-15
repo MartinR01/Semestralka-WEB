@@ -10,7 +10,9 @@
   </div>
   <div class="col-8 col-lg-6">
     <h1>{{ title }}
-      <span onclick="toggleFav()"><i class="{% if isFavorite > 0 %}fas {% else %} far  {% endif %} fa-heart" id="favBtn"></i></span>
+        {% if username is defined %}
+            <span onclick="toggleFav()"><i class="{% if isFavorite > 0 %}fas {% else %} far  {% endif %} fa-heart" id="favBtn"></i></span>
+        {% endif %}
     </h1>
 
     <h5>({{ genre }})</h5>

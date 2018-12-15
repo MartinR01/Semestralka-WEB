@@ -42,7 +42,12 @@
         public static function deleteUser($userID){
             if($userID != $_SESSION['id']){
                 DB::getInstance()->deleteUser($userID);
+                $response['status']='success';
+            } else {
+                $response['status']='error';
+                $response['message']="You can't delete yourself!";
             }
+            echo json_encode($response);
         }
 
         public static function toggleAdmin($userID){
@@ -51,7 +56,7 @@
                 $response['status']='success';
             } else {
                 $response['status']='error';
-                $response['message']="you can't remove your own admin rights";
+                $response['message']="!You can't remove your own admin rights!";
             }
             echo json_encode($response);
         }
