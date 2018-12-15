@@ -16,7 +16,8 @@ function toggleFav() {
 }
 
 function comment() {
-    let text = $('#comment').val();
+    let text = CKEDITOR.instances.comment.getData();
+
     if(text.length == 0){
         alert('empty comment!');
         return;
@@ -28,6 +29,7 @@ function comment() {
             text: text
         },
         function(data, status) {
+            // console.log(data);
             location.reload();
         }
     );

@@ -5,6 +5,7 @@
     "components/jquery": "^3.3",
     "components/font-awesome": "^5.4",
     "ext-pdo": "*",
-    "ext-json": "*"
+    "ext-json": "*",
+    "ckeditor/ckeditor": "dev-basic/4.11.x"
   }
 }

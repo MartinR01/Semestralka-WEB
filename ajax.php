@@ -11,7 +11,8 @@ function favorite(){
 
 function comment(){
     $db = DB::getInstance();
-    $db->movieAddComment($_POST['movieID'], $_SESSION['id'],  $_POST['text']);
+    $text = strip_tags($_POST['text'],'<p><u><s><strong><a><ol><ul><li>');
+    $db->movieAddComment($_POST['movieID'], $_SESSION['id'],  $text);
 }
 
 function rate(){

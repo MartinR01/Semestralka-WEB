@@ -4,8 +4,49 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "20a651c49f4f11700df2c4d48e208f1a",
+    "content-hash": "b2b3a613d773857ac46ce48cedcb7824",
     "packages": [
+        {
+            "name": "ckeditor/ckeditor",
+            "version": "dev-basic/4.11.x",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ckeditor/ckeditor-releases.git",
+                "reference": "67304746cc8942fe13b4e6bd032d01ebc2426920"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ckeditor/ckeditor-releases/zipball/67304746cc8942fe13b4e6bd032d01ebc2426920",
+                "reference": "67304746cc8942fe13b4e6bd032d01ebc2426920",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+",
+                "LGPL-2.1+",
+                "MPL-1.1+"
+            ],
+            "authors": [
+                {
+                    "name": "CKSource",
+                    "homepage": "http://cksource.com"
+                }
+            ],
+            "description": "JavaScript WYSIWYG web text editor.",
+            "homepage": "http://ckeditor.com",
+            "keywords": [
+                "CKEditor",
+                "editor",
+                "fckeditor",
+                "html",
+                "javascript",
+                "richtext",
+                "text",
+                "wysiwyg"
+            ],
+            "time": "2018-11-08T18:03:55+00:00"
+        },
         {
             "name": "components/font-awesome",
             "version": "5.4.2",
@@ -322,9 +363,14 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "ckeditor/ckeditor": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-pdo": "*",
+        "ext-json": "*"
+    },
     "platform-dev": []
 }

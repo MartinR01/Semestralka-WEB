@@ -1,7 +1,10 @@
 {% extends 'base.twig' %}
 
 {% block title %}{{ title }}{% endblock %}
-{% block css %}<link rel="stylesheet" href="css\movie.css">{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="css\movie.css">
+
+{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -51,7 +54,8 @@
         {% if comments is not empty %}
             {% for comment in comments %}
                 {{ comment.jmeno }}  {{ comment.datum }}<br/>
-                {{ comment.text }} <br/><br/>
+                {{ comment.text | striptags('<p><u><s><strong><a><ol><ul><li>') | raw }} <hr />
+
             {% endfor %}
         {% else %}
           No comments available
@@ -60,7 +64,7 @@
             <form>
                 <div class="form-group">
                     <label for="comment">Comment:</label>
-                    <textarea id="comment" class="form-control" placeholder="Comment here..."></textarea>
+                    <textarea name="comment" id="comment" class="form-control ckeditor" placeholder="Comment here..."></textarea>
                 </div>
             </form>
             <button class="btn" onclick="comment()">Comment</button>
@@ -74,5 +78,6 @@
 
 
 {% block javascript %}
-<script src="js\movie.js"></script>
+    <script src="vendor/ckeditor/ckeditor/ckeditor.js"></script>
+    <script src="js\movie.js"></script>
 {% endblock %}
