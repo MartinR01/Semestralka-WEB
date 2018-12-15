@@ -75,9 +75,13 @@
             case 'register':
                 $sablona='register.twig';
                 break;
+
             case 'login':
-                $sablona='login.twig';
-                break;
+                if( !isset($_SESSION['id'])){
+                    $sablona='login.twig';
+                    break;
+                }
+
             case 'create':
                 if( isset($_SESSION['content_admin'])){
                     $db = DB::getInstance();

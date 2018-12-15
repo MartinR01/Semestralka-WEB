@@ -26,6 +26,10 @@ function toggleAdmin(){
     return User::toggleAdmin($_POST['userID']);
 }
 
+function login(){
+    return User::login($_POST['username'],$_POST['password']);
+}
+
 // choose correct action
 switch ($_POST['action']){
     case 'favorite': favorite(); break;
@@ -33,4 +37,6 @@ switch ($_POST['action']){
     case 'rate': rate(); break;
     case 'deleteUser': deleteUser(); break;
     case 'toggleAdmin':toggleAdmin();break;
+    case 'login':login();break;
+
 }

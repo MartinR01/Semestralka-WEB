@@ -2,7 +2,8 @@
 
 {% block content %}
 
-<form action="index.php?action=login" method="post">
+<form action="login" method="post">
+    <input type="hidden" name="action" value="login" />
   <div class="form-group">
     <label for="username">Username</label>
     <input type="text" name="username" class="form-control" id="username" placeholder="Username">
@@ -15,4 +16,7 @@
 </form>
 
 
+{% endblock %}
+{% block javascript %}
+    <script src="js/login.js"></script>
 {% endblock %}
