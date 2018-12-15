@@ -2,6 +2,10 @@
 
 {% block title %}Users{% endblock %}
 
+{% block css %}
+    <link rel="stylesheet" href="css\users.css">
+{% endblock %}
+
 {% block content %}
     <table class="table">
         <thead>
@@ -18,7 +22,7 @@
                   <th scope="row">{{user.id}}</th>
                   <td>{{user.name}}</td>
                   <td>
-                      <i onclick="toggleAdmin({{user.id}})" class="fas fa-2x fa-toggle-{% if user.content_admin == 1 %}on{% else %}off{% endif %}"></i>
+                      <i onclick="toggleAdmin({{user.id}})" class="fas fa-2x fa-toggle-on {% if user.content_admin == 0 %}fa-flip-horizontal{% endif %}"></i>
                   </td>
                   <td>
                       <button class="btn" onclick="deleteUser({{user.id}})"><i class="fas fa-trash-alt"></i></button>

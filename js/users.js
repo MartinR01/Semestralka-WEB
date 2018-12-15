@@ -10,7 +10,7 @@ function deleteUser(userID){
 }
 function toggleAdmin(userID){
     var target = $(event.target);
-    
+
     $.post("ajax.php",
     {
         action: 'toggleAdmin',
@@ -19,8 +19,8 @@ function toggleAdmin(userID){
     function(data, status) {
         var response = $.parseJSON(data);
         if(response.status == 'success'){
-            target.toggleClass("fa-toggle-on");
-            target.toggleClass("fa-toggle-off");
+            target.toggleClass("fa-flip-horizontal");
+            // target.toggleClass("fa-toggle-off");
         }else{
             alert(response.message);
         }
