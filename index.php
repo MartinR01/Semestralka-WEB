@@ -5,7 +5,6 @@
     require_once 'php/DB.class.php';
     require_once 'php/Movie.class.php';
     require_once 'php/Actor.class.php';
-    require_once 'php/ContentCreator.php';
     require_once 'php/FileProcessor.class.php';
 
 
