@@ -23,7 +23,7 @@
                 $response['status']='error';
                 $response['message']="Invalid username/password!";
             }
-            echo json_encode($response);
+            return json_encode($response);
         }
 
         public function logout(){
@@ -34,7 +34,7 @@
         public function register($username, $password){
             $passHash = password_hash($password, PASSWORD_DEFAULT);
             $this->db->registerUser($username, $passHash);
-            return $this->login($username, $password);
+            $this->login($username, $password);
         }
 
         public static function getUsers(){

@@ -28,7 +28,7 @@ function toggleAdmin(){
 }
 
 function login(){
-    return User::login($_POST['username'],$_POST['password']);
+    echo User::login($_POST['username'],$_POST['password']);
 }
 
 // choose correct action
